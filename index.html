@@ -3,105 +3,587 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f5f5f7">
+  <meta name="theme-color" content="#0A84FF">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="RPT 프로필조회">
-  <title>RPT 상품프로필조회</title>
-
   <link rel="manifest" href="./manifest.json">
-  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
-  <link rel="icon" href="./icon-192.png">
-  <link rel="stylesheet" href="./style.css">
-</head>
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <title>RPT 상품프로필조회</title>
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --card: #ffffff;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --line: #d2d2d7;
+      --blue: #0a84ff;
+      --blue-pressed: #0071e3;
+      --radius: 16px;
+      --shadow: 0 2px 12px rgba(0,0,0,.06);
+    }
 
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+    }
+
+    button, input { font: inherit; }
+
+    .app {
+      width: 100%;
+      max-width: 620px;
+      margin: 0 auto;
+      padding: max(18px, env(safe-area-inset-top)) 16px
+               max(28px, env(safe-area-inset-bottom));
+    }
+
+    .title {
+      margin: 4px 2px 14px;
+      font-size: 24px;
+      font-weight: 750;
+      letter-spacing: -.4px;
+    }
+
+    .search-card, .profile-card, .group-card {
+      background: var(--card);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .search-card { padding: 14px; }
+
+    .search-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 78px 78px;
+      gap: 8px;
+    }
+
+    .search-input {
+      width: 100%;
+      min-width: 0;
+      height: 46px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0 14px;
+      background: #fff;
+      color: var(--text);
+      font-size: 16px;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(10,132,255,.15);
+    }
+
+    .btn {
+      height: 46px;
+      border: 0;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: white;
+    }
+
+    .btn-primary:active { background: var(--blue-pressed); }
+
+    .btn-secondary {
+      background: #e9e9ee;
+      color: var(--text);
+    }
+
+    .status {
+      min-height: 22px;
+      margin: 10px 2px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .profile-card {
+      margin-top: 14px;
+      overflow: hidden;
+    }
+
+    .image-wrap {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #f2f2f7;
+      display: grid;
+      place-items: center;
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #fff;
+      display: none;
+    }
+
+    .image-message {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .details {
+      padding: 18px;
+    }
+
+    .details-title {
+      margin: 0 0 12px;
+      font-size: 19px;
+      font-weight: 750;
+    }
+
+    .detail-row {
+      display: grid;
+      grid-template-columns: 84px minmax(0, 1fr);
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid #ececf0;
+      align-items: start;
+    }
+
+    .detail-row:last-child { border-bottom: 0; }
+
+    .label {
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 650;
+    }
+
+    .value {
+      min-width: 0;
+      font-size: 16px;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    .link-button {
+      width: 100%;
+      min-height: 46px;
+      margin-top: 14px;
+      padding: 10px 14px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--blue);
+      color: white;
+      font-weight: 700;
+    }
+
+    .link-button:disabled {
+      background: #c7c7cc;
+      color: #fff;
+    }
+
+    .group-card {
+      margin-top: 14px;
+      padding: 16px;
+      display: none;
+    }
+
+    .group-title {
+      margin: 0 0 12px;
+      font-size: 19px;
+      font-weight: 750;
+    }
+
+    .group-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .group-item {
+      width: 100%;
+      text-align: left;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: #fff;
+      padding: 13px 14px;
+      color: var(--text);
+    }
+
+    .group-item.active {
+      border-color: var(--blue);
+      background: rgba(10,132,255,.07);
+    }
+
+    .group-code {
+      font-weight: 750;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .group-sub {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .empty-state {
+      margin-top: 14px;
+      padding: 24px 18px;
+      text-align: center;
+      color: var(--muted);
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid rgba(0,0,0,.06);
+    }
+
+    [hidden] { display: none !important; }
+
+    @media (max-width: 420px) {
+      .app { padding-left: 12px; padding-right: 12px; }
+      .search-row {
+        grid-template-columns: minmax(0, 1fr) 72px 72px;
+      }
+      .details { padding: 16px; }
+    }
+  </style>
+</head>
 <body>
   <main class="app">
-    <header class="app-header">
-      <div>
-        <h1>RPT 상품프로필조회</h1>
-        <p id="version">모바일 v1.0</p>
-      </div>
-      <div id="dataStatus" class="status-pill">데이터 연결 중</div>
-    </header>
+    <h1 class="title">RPT 상품프로필조회</h1>
 
-    <section class="card search-card">
-      <label for="searchInput" class="search-label">상품코드 / 배번호</label>
-
+    <section class="search-card">
       <div class="search-row">
-        <div class="autocomplete-wrap">
-          <input
-            id="searchInput"
-            type="search"
-            inputmode="text"
-            autocomplete="off"
-            autocapitalize="off"
-            spellcheck="false"
-            placeholder="코드 또는 배번호 입력"
-            aria-label="상품코드 또는 배번호 검색"
-          >
-          <div id="suggestions" class="suggestions" hidden></div>
-        </div>
-
-        <button id="searchButton" class="button primary" type="button">검색</button>
-        <button id="resetButton" class="button primary" type="button">초기화</button>
+        <input id="searchInput" class="search-input" type="search"
+               placeholder="상품코드 또는 배번호" autocomplete="off">
+        <button id="searchButton" class="btn btn-primary" type="button">검색</button>
+        <button id="resetButton" class="btn btn-secondary" type="button">초기화</button>
       </div>
-
-      <p id="message" class="message"></p>
+      <div id="status" class="status" aria-live="polite">데이터를 불러오는 중...</div>
     </section>
 
-    <section class="card profile-card">
+    <section id="profileCard" class="profile-card" hidden>
       <div class="image-wrap">
-        <img id="productImage" alt="상품 이미지" hidden>
-        <div id="imagePlaceholder" class="image-placeholder">이미지 없음</div>
+        <img id="productImage" alt="상품 이미지">
+        <div id="imageMessage" class="image-message">이미지 없음</div>
       </div>
 
-      <dl class="profile-list">
-        <div class="profile-row">
-          <dt>상품코드</dt>
-          <dd id="productCode">-</dd>
-        </div>
-        <div class="profile-row">
-          <dt>배번호</dt>
-          <dd id="batchNo">-</dd>
-        </div>
-        <div class="profile-row">
-          <dt>상품명</dt>
-          <dd id="productName">-</dd>
-        </div>
-        <div class="profile-row">
-          <dt>옵션1</dt>
-          <dd id="option1">-</dd>
-        </div>
-        <div class="profile-row">
-          <dt>옵션2</dt>
-          <dd id="option2">-</dd>
-        </div>
-        <div class="profile-row">
-          <dt>옵션3</dt>
-          <dd id="option3">-</dd>
-        </div>
-        <div class="profile-row">
-          <dt>속성</dt>
-          <dd id="property">-</dd>
-        </div>
-        <div class="profile-row">
-          <dt>그룹</dt>
-          <dd id="group">-</dd>
-        </div>
-        <div class="profile-row link-row">
-          <dt>링크</dt>
-          <dd><a id="productLink" href="#" target="_blank" rel="noopener">-</a></dd>
-        </div>
-      </dl>
+      <div class="details">
+        <h2 class="details-title">상품 정보</h2>
+        <div class="detail-row"><div class="label">상품코드</div><div id="productCode" class="value">-</div></div>
+        <div class="detail-row"><div class="label">배번호</div><div id="batchNo" class="value">-</div></div>
+        <div class="detail-row"><div class="label">상품명</div><div id="productName" class="value">-</div></div>
+        <div class="detail-row"><div class="label">옵션1</div><div id="option1" class="value">-</div></div>
+        <div class="detail-row"><div class="label">옵션2</div><div id="option2" class="value">-</div></div>
+        <div class="detail-row"><div class="label">옵션3</div><div id="option3" class="value">-</div></div>
+        <button id="linkButton" class="link-button" type="button" disabled>상세페이지 열기</button>
+      </div>
     </section>
 
-    <section id="groupSection" class="card group-section" hidden>
-      <h2>같은 그룹 상품</h2>
+    <section id="groupCard" class="group-card">
+      <h2 class="group-title">같은 그룹 상품</h2>
       <div id="groupList" class="group-list"></div>
     </section>
+
+    <div id="emptyState" class="empty-state">
+      상품코드 또는 배번호를 검색해 주세요.
+    </div>
   </main>
 
-  <script src="./app.js"></script>
+  <script>
+    const DATA_URL = "https://raw.githubusercontent.com/nu9ri/rpt-product-profile/main/products.json";
+    const IMAGE_BASE_URL = "https://nu9ri.github.io/rpt-product-profile/images";
+    const IMAGE_EXTENSIONS = [".jpg", ".png", ".jpeg", ".webp"];
+
+    const el = id => document.getElementById(id);
+    const searchInput = el("searchInput");
+    const searchButton = el("searchButton");
+    const resetButton = el("resetButton");
+    const status = el("status");
+    const profileCard = el("profileCard");
+    const groupCard = el("groupCard");
+    const groupList = el("groupList");
+    const emptyState = el("emptyState");
+    const productImage = el("productImage");
+    const imageMessage = el("imageMessage");
+    const linkButton = el("linkButton");
+
+    let products = [];
+    let currentRow = null;
+    let imageToken = 0;
+
+    function value(row, names) {
+      for (const name of names) {
+        if (row && row[name] !== undefined && row[name] !== null) {
+          const v = String(row[name]).trim();
+          if (v && v.toLowerCase() !== "nan") return v;
+        }
+      }
+      return "";
+    }
+
+    function normalize(v) {
+      return String(v ?? "")
+        .trim()
+        .toLowerCase()
+        .replace(/[\s_-]+/g, "");
+    }
+
+    function field(row, key) {
+      const aliases = {
+        productCode: ["상품코드", "상품 코드", "product_code", "productCode", "code"],
+        batchNo: ["배번호", "배 번호", "batch_no", "batchNo"],
+        productName: ["상품명", "상품 이름", "product_name", "productName", "name"],
+        option1: ["옵션1", "옵션 1", "option1", "option_1"],
+        option2: ["옵션2", "옵션 2", "option2", "option_2"],
+        option3: ["옵션3", "옵션 3", "option3", "option_3"],
+        link: ["링크", "상세링크", "상세 링크", "link", "url"],
+        group: ["그룹", "그룹코드", "그룹 코드", "group", "group_code", "groupCode"]
+      };
+      return value(row, aliases[key]);
+    }
+
+    async function loadData() {
+      try {
+        const response = await fetch(DATA_URL + "?v=" + Date.now(), {
+          cache: "no-store"
+        });
+        if (!response.ok) throw new Error("데이터 응답 오류");
+        const data = await response.json();
+        products = Array.isArray(data) ? data : [];
+        status.textContent = `${products.length.toLocaleString()}개 데이터 준비 완료`;
+      } catch (error) {
+        status.textContent = "데이터를 불러오지 못했습니다.";
+      }
+    }
+
+    function chooseRepresentative(rows) {
+      for (const row of rows) {
+        const group = field(row, "group");
+        if (!group) continue;
+
+        const exact = products.find(item =>
+          normalize(field(item, "productCode")) === normalize(group) ||
+          normalize(field(item, "batchNo")) === normalize(group)
+        );
+        if (exact) return exact;
+      }
+
+      return rows.find(row => field(row, "group")) || rows[0];
+    }
+
+    function findGroupRows(row) {
+      const groupValue = field(row, "group");
+      const code = field(row, "productCode");
+      const batch = field(row, "batchNo");
+
+      if (!groupValue) {
+        return [];
+      }
+
+      return products.filter(item => {
+        const itemGroup = field(item, "group");
+        const itemCode = field(item, "productCode");
+        const itemBatch = field(item, "batchNo");
+
+        return normalize(itemGroup) === normalize(groupValue) ||
+               normalize(itemCode) === normalize(groupValue) ||
+               normalize(itemBatch) === normalize(groupValue) ||
+               normalize(itemGroup) === normalize(code) ||
+               normalize(itemGroup) === normalize(batch);
+      });
+    }
+
+    function setText(id, text) {
+      el(id).textContent = text || "-";
+    }
+
+    async function loadImage(batchNo) {
+      const token = ++imageToken;
+      productImage.style.display = "none";
+      productImage.removeAttribute("src");
+      imageMessage.style.display = "block";
+      imageMessage.textContent = batchNo ? "이미지 불러오는 중..." : "배번호 없음";
+
+      if (!batchNo) return;
+
+      const encoded = encodeURIComponent(batchNo);
+
+      for (const ext of IMAGE_EXTENSIONS) {
+        const url = `${IMAGE_BASE_URL}/${encoded}${ext}?v=${Date.now()}`;
+        const loaded = await new Promise(resolve => {
+          const img = new Image();
+          img.onload = () => resolve(true);
+          img.onerror = () => resolve(false);
+          img.src = url;
+        });
+
+        if (token !== imageToken) return;
+
+        if (loaded) {
+          productImage.src = url;
+          productImage.style.display = "block";
+          imageMessage.style.display = "none";
+          return;
+        }
+      }
+
+      imageMessage.textContent = "이미지 없음";
+    }
+
+    function showProfile(row) {
+      currentRow = row;
+      profileCard.hidden = false;
+      emptyState.hidden = true;
+
+      setText("productCode", field(row, "productCode"));
+      setText("batchNo", field(row, "batchNo"));
+      setText("productName", field(row, "productName"));
+      setText("option1", field(row, "option1"));
+      setText("option2", field(row, "option2"));
+      setText("option3", field(row, "option3"));
+
+      const link = field(row, "link");
+      linkButton.disabled = !link;
+      linkButton.dataset.link = link || "";
+
+      loadImage(field(row, "batchNo"));
+      showGroup(row);
+    }
+
+    function showGroup(row) {
+      const rows = findGroupRows(row);
+      const unique = [];
+      const seen = new Set();
+
+      for (const item of rows) {
+        const key = normalize(field(item, "productCode")) + "|" + normalize(field(item, "batchNo"));
+        if (!seen.has(key)) {
+          seen.add(key);
+          unique.push(item);
+        }
+      }
+
+      groupList.innerHTML = "";
+
+      if (unique.length <= 1) {
+        groupCard.style.display = "none";
+        return;
+      }
+
+      for (const item of unique) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "group-item";
+
+        const isActive =
+          normalize(field(item, "productCode")) === normalize(field(row, "productCode")) &&
+          normalize(field(item, "batchNo")) === normalize(field(row, "batchNo"));
+
+        if (isActive) button.classList.add("active");
+
+        const code = document.createElement("div");
+        code.className = "group-code";
+        code.textContent = field(item, "productCode") || field(item, "batchNo") || "-";
+
+        const sub = document.createElement("div");
+        sub.className = "group-sub";
+        sub.textContent = [
+          field(item, "productName"),
+          field(item, "option1"),
+          field(item, "option2"),
+          field(item, "option3")
+        ].filter(Boolean).join(" · ");
+
+        button.append(code, sub);
+        button.addEventListener("click", () => {
+          showProfile(item);
+          window.scrollTo({ top: profileCard.offsetTop - 12, behavior: "smooth" });
+        });
+
+        groupList.appendChild(button);
+      }
+
+      groupCard.style.display = "block";
+    }
+
+    function search() {
+      const keyword = normalize(searchInput.value);
+
+      if (!keyword) {
+        status.textContent = "상품코드 또는 배번호를 입력해 주세요.";
+        searchInput.focus();
+        return;
+      }
+
+      if (!products.length) {
+        status.textContent = "데이터가 아직 준비되지 않았습니다.";
+        return;
+      }
+
+      let rows = products.filter(row =>
+        normalize(field(row, "productCode")) === keyword ||
+        normalize(field(row, "batchNo")) === keyword
+      );
+
+      if (!rows.length) {
+        rows = products.filter(row =>
+          normalize(field(row, "productCode")).includes(keyword) ||
+          normalize(field(row, "batchNo")).includes(keyword)
+        );
+      }
+
+      if (!rows.length) {
+        resetView(false);
+        status.textContent = "검색 결과가 없습니다.";
+        return;
+      }
+
+      const representative = chooseRepresentative(rows);
+      showProfile(representative);
+      status.textContent = `${rows.length.toLocaleString()}개 검색됨`;
+    }
+
+    function resetView(clearInput = true) {
+      imageToken++;
+      currentRow = null;
+      if (clearInput) searchInput.value = "";
+      profileCard.hidden = true;
+      groupCard.style.display = "none";
+      groupList.innerHTML = "";
+      emptyState.hidden = false;
+      linkButton.disabled = true;
+      linkButton.dataset.link = "";
+      status.textContent = products.length
+        ? `${products.length.toLocaleString()}개 데이터 준비 완료`
+        : "데이터를 불러오는 중...";
+      if (clearInput) searchInput.focus();
+    }
+
+    searchButton.addEventListener("click", search);
+    resetButton.addEventListener("click", () => resetView(true));
+    searchInput.addEventListener("keydown", event => {
+      if (event.key === "Enter") search();
+    });
+
+    linkButton.addEventListener("click", () => {
+      const link = linkButton.dataset.link;
+      if (link) window.open(link, "_blank", "noopener");
+    });
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+      });
+    }
+
+    loadData();
+  </script>
 </body>
 </html>

@@ -1,72 +1,32 @@
-const CACHE_NAME = "rpt-profile-mobile-v1.0.0";
+const CACHE_NAME = "rpt-profile-mobile-v2";
+const APP_FILES = ["./", "./index.html", "./manifest.json", "./icon.svg"];
 
-const APP_SHELL = [
-  "./",
-  "./index.html",
-  "./style.css",
-  "./app.js",
-  "./manifest.json",
-  "./icon-192.png",
-  "./icon-512.png",
-  "./apple-touch-icon.png"
-];
-
-self.addEventListener("install", (event) => {
+self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL))
+    caches.open(CACHE_NAME).then(cache => cache.addAll(APP_FILES))
   );
   self.skipWaiting();
 });
 
-self.addEventListener("activate", (event) => {
+self.addEventListener("activate", event => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
-        keys
-          .filter((key) => key !== CACHE_NAME)
-          .map((key) => caches.delete(key))
-      )
+    caches.keys().then(keys =>
+      Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key)))
     )
   );
   self.clients.claim();
 });
 
-self.addEventListener("fetch", (event) => {
-  const request = event.request;
-  const url = new URL(request.url);
+self.addEventListener("fetch", event => {
+  const url = new URL(event.request.url);
 
-  if (
-    url.hostname === "raw.githubusercontent.com" ||
-    url.pathname.includes("/images/")
-  ) {
-    event.respondWith(
-      fetch(request, { cache: "no-store" }).catch(() => caches.match(request))
-    );
-    return;
-  }
-
-  if (request.mode === "navigate") {
-    event.respondWith(
-      fetch(request)
-        .then((response) => {
-          const copy = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put("./index.html", copy));
-          return response;
-        })
-        .catch(() => caches.match("./index.html"))
-    );
+  if (url.hostname.includes("githubusercontent.com") ||
+      url.hostname.includes("github.io")) {
+    event.respondWith(fetch(event.request, { cache: "no-store" }));
     return;
   }
 
   event.respondWith(
-    caches.match(request).then(
-      (cached) =>
-        cached ||
-        fetch(request).then((response) => {
-          const copy = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
-          return response;
-        })
-    )
+    caches.match(event.request).then(cached => cached || fetch(event.request))
   );
 });
