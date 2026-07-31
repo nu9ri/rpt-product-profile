@@ -3,9 +3,9 @@
 
   const APP_VERSION = "mobile-v1.0.0";
   const DATA_URL =
-    "../products.json";
+    "./products.json";
   const IMAGE_BASE_URL =
-    "../images";
+    "./images";
   const IMAGE_EXTENSIONS = [".jpg", ".png", ".jpeg", ".webp"];
 
   const FIELDS = {

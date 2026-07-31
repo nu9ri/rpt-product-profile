@@ -1,6 +1,6 @@
 {
   "name": "RPT 상품프로필조회",
-  "short_name": "RPT 프로필조회",
+  "short_name": "상품프로필",
   "description": "상품코드와 배번호로 상품 프로필을 조회하는 모바일 앱",
   "start_url": "./",
   "scope": "./",
