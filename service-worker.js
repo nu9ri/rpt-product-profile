@@ -1,5 +1,7 @@
-const CACHE_NAME = "rpt-profile-mobile-v3";
-const APP_FILES = ["./", "./index.html", "./manifest.json", "./icon.svg"];
+const CACHE_NAME = "rpt-profile-mobile-v4-large-iconfix";
+const APP_FILES = ["./", "./index.html", "./manifest.json", "./icon.svg",
+  "./icon-192.png",
+  "./icon-512.png"];
 
 self.addEventListener("install", event => {
   event.waitUntil(
