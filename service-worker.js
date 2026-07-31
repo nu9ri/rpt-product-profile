@@ -1,4 +1,4 @@
-const CACHE_NAME = "rpt-profile-mobile-v4-large-iconfix";
+const CACHE_NAME = "rpt-profile-mobile-v3-5-medium-group-codes";
 const APP_FILES = ["./", "./index.html", "./manifest.json", "./icon.svg",
   "./icon-192.png",
   "./icon-512.png"];
