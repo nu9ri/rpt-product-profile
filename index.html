@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-title" content="RPT 프로필조회">
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" href="./icon.svg" type="image/svg+xml">
-  <title>RPT 상품프로필조회</title>
+  <title>RPT 상품프로필조회 모바일 v3</title>
   <style>
     :root {
       --bg: #f5f5f7;
@@ -19,8 +19,8 @@
       --line: #d2d2d7;
       --blue: #0a84ff;
       --blue-pressed: #0071e3;
-      --radius: 16px;
-      --shadow: 0 2px 12px rgba(0,0,0,.06);
+      --radius: 18px;
+      --shadow: 0 3px 16px rgba(0,0,0,.07);
     }
 
     * { box-sizing: border-box; }
@@ -37,15 +37,15 @@
 
     .app {
       width: 100%;
-      max-width: 620px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: max(18px, env(safe-area-inset-top)) 16px
+      padding: max(22px, env(safe-area-inset-top)) 14px
                max(28px, env(safe-area-inset-bottom));
     }
 
     .title {
-      margin: 4px 2px 14px;
-      font-size: 24px;
+      margin: 6px 2px 18px;
+      font-size: 30px;
       font-weight: 750;
       letter-spacing: -.4px;
     }
@@ -57,24 +57,24 @@
       box-shadow: var(--shadow);
     }
 
-    .search-card { padding: 14px; }
+    .search-card { padding: 22px; }
 
     .search-row {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 78px 78px;
+      grid-template-columns: minmax(0, 1fr) 92px 92px;
       gap: 8px;
     }
 
     .search-input {
       width: 100%;
       min-width: 0;
-      height: 46px;
+      height: 56px;
       border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 0 14px;
+      border-radius: 14px;
+      padding: 0 16px;
       background: #fff;
       color: var(--text);
-      font-size: 16px;
+      font-size: 18px;
       outline: none;
     }
 
@@ -84,9 +84,9 @@
     }
 
     .btn {
-      height: 46px;
+      height: 56px;
       border: 0;
-      border-radius: 12px;
+      border-radius: 14px;
       font-weight: 700;
       cursor: pointer;
     }
@@ -104,14 +104,15 @@
     }
 
     .status {
-      min-height: 22px;
+      min-height: 24px;
       margin: 10px 2px 0;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 16px;
+      line-height: 1.5;
     }
 
     .profile-card {
-      margin-top: 14px;
+      margin-top: 18px;
       overflow: hidden;
     }
 
@@ -131,28 +132,29 @@
       object-fit: contain;
       background: #fff;
       display: none;
+      transition: opacity .18s ease;
     }
 
     .image-message {
       color: var(--muted);
-      font-size: 16px;
+      font-size: 18px;
     }
 
     .details {
-      padding: 18px;
+      padding: 22px;
     }
 
     .details-title {
-      margin: 0 0 12px;
-      font-size: 19px;
+      margin: 0 0 16px;
+      font-size: 22px;
       font-weight: 750;
     }
 
     .detail-row {
       display: grid;
-      grid-template-columns: 84px minmax(0, 1fr);
-      gap: 10px;
-      padding: 10px 0;
+      grid-template-columns: 104px minmax(0, 1fr);
+      gap: 12px;
+      padding: 13px 0;
       border-bottom: 1px solid #ececf0;
       align-items: start;
     }
@@ -161,24 +163,24 @@
 
     .label {
       color: var(--muted);
-      font-size: 15px;
+      font-size: 17px;
       font-weight: 650;
     }
 
     .value {
       min-width: 0;
-      font-size: 16px;
+      font-size: 18px;
       line-height: 1.45;
       overflow-wrap: anywhere;
     }
 
     .link-button {
       width: 100%;
-      min-height: 46px;
-      margin-top: 14px;
-      padding: 10px 14px;
+      min-height: 56px;
+      margin-top: 18px;
+      padding: 14px 16px;
       border: 0;
-      border-radius: 12px;
+      border-radius: 14px;
       background: var(--blue);
       color: white;
       font-weight: 700;
@@ -190,30 +192,36 @@
     }
 
     .group-card {
-      margin-top: 14px;
-      padding: 16px;
+      margin-top: 18px;
+      padding: 20px;
       display: none;
     }
 
     .group-title {
-      margin: 0 0 12px;
-      font-size: 19px;
+      margin: 0 0 16px;
+      font-size: 22px;
       font-weight: 750;
     }
 
     .group-list {
       display: grid;
-      gap: 10px;
+      gap: 14px;
     }
 
     .group-item {
       width: 100%;
+      min-height: 78px;
       text-align: left;
       border: 1px solid var(--line);
-      border-radius: 13px;
+      border-radius: 15px;
       background: #fff;
-      padding: 13px 14px;
+      padding: 17px 16px;
       color: var(--text);
+      transition: background .15s ease, border-color .15s ease, transform .08s ease;
+    }
+
+    .group-item:active {
+      transform: scale(.995);
     }
 
     .group-item.active {
@@ -223,18 +231,19 @@
 
     .group-code {
       font-weight: 750;
-      font-size: 16px;
-      margin-bottom: 5px;
+      font-size: 19px;
+      margin-bottom: 7px;
     }
 
     .group-sub {
       color: var(--muted);
-      font-size: 14px;
+      font-size: 16px;
+      line-height: 1.5;
       line-height: 1.4;
     }
 
     .empty-state {
-      margin-top: 14px;
+      margin-top: 18px;
       padding: 24px 18px;
       text-align: center;
       color: var(--muted);
@@ -250,7 +259,7 @@
       .search-row {
         grid-template-columns: minmax(0, 1fr) 72px 72px;
       }
-      .details { padding: 16px; }
+      .details { padding: 20px; }
     }
   </style>
 </head>
@@ -287,7 +296,7 @@
     </section>
 
     <section id="groupCard" class="group-card">
-      <h2 class="group-title">같은 그룹 상품</h2>
+      <h2 id="groupTitle" class="group-title">같은 그룹 상품</h2>
       <div id="groupList" class="group-list"></div>
     </section>
 
@@ -309,6 +318,7 @@
     const profileCard = el("profileCard");
     const groupCard = el("groupCard");
     const groupList = el("groupList");
+    const groupTitle = el("groupTitle");
     const emptyState = el("emptyState");
     const productImage = el("productImage");
     const imageMessage = el("imageMessage");
@@ -406,6 +416,7 @@
 
     async function loadImage(batchNo) {
       const token = ++imageToken;
+      productImage.style.opacity = "0";
       productImage.style.display = "none";
       productImage.removeAttribute("src");
       imageMessage.style.display = "block";
@@ -429,6 +440,9 @@
         if (loaded) {
           productImage.src = url;
           productImage.style.display = "block";
+          requestAnimationFrame(() => {
+            productImage.style.opacity = "1";
+          });
           imageMessage.style.display = "none";
           return;
         }
@@ -471,6 +485,7 @@
       }
 
       groupList.innerHTML = "";
+      groupTitle.textContent = "같은 그룹 상품";
 
       if (unique.length <= 1) {
         groupCard.style.display = "none";
@@ -510,6 +525,7 @@
         groupList.appendChild(button);
       }
 
+      groupTitle.textContent = `같은 그룹 상품 ${unique.length}개`;
       groupCard.style.display = "block";
     }
 
