@@ -8,11 +8,11 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="RPT 프로필조회">
   <link rel="manifest" href="./manifest.json">
-  <link rel="icon" href="./icon-192.png" sizes="192x192" type="image/png">
-  <link rel="icon" href="./icon-512.png" sizes="512x512" type="image/png">
-  <link rel="apple-touch-icon" href="./icon-192.png">
-  <link rel="shortcut icon" href="./icon-192.png" type="image/png">
-  <title>RPT 상품프로필조회 모바일 v3.5</title>
+  <link rel="icon" href="./app-icon-192-v36.png" sizes="192x192" type="image/png">
+  <link rel="icon" href="./app-icon-512-v36.png" sizes="512x512" type="image/png">
+  <link rel="apple-touch-icon" href="./app-icon-192-v36.png">
+  <link rel="shortcut icon" href="./app-icon-192-v36.png" type="image/png">
+  <title>RPT 상품프로필조회 모바일 v3.6</title>
   <style>
     :root {
       --bg: #f5f5f7;
@@ -60,24 +60,24 @@
       box-shadow: var(--shadow);
     }
 
-    .search-card { padding: 18px; }
+    .search-card { padding: 16px 14px; }
 
     .search-row {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 86px 86px;
+      grid-template-columns: minmax(0, 1fr) 66px 66px;
       gap: 8px;
     }
 
     .search-input {
       width: 100%;
       min-width: 0;
-      height: 60px;
+      height: 36px;
       border: 1px solid var(--line);
-      border-radius: 16px;
+      border-radius: 11px;
       padding: 0 18px;
       background: #fff;
       color: var(--text);
-      font-size: 17px;
+      font-size: 16px;
       outline: none;
     }
 
@@ -87,10 +87,10 @@
     }
 
     .btn {
-      height: 60px;
+      height: 36px;
       border: 0;
-      font-size: 17px;
-      border-radius: 16px;
+      font-size: 15px;
+      border-radius: 11px;
       font-weight: 700;
       cursor: pointer;
     }
@@ -146,20 +146,20 @@
     }
 
     .details {
-      padding: 23px 20px;
+      padding: 17px 18px;
     }
 
     .details-title {
-      margin: 0 0 16px;
-      font-size: 23px;
+      margin: 0 0 10px;
+      font-size: 21px;
       font-weight: 750;
     }
 
     .detail-row {
       display: grid;
-      grid-template-columns: 106px minmax(0, 1fr);
-      gap: 14px;
-      padding: 14px 0;
+      grid-template-columns: 92px minmax(0, 1fr);
+      gap: 8px;
+      padding: 9px 0;
       border-bottom: 1px solid #ececf0;
       align-items: start;
     }
@@ -168,7 +168,7 @@
 
     .label {
       color: var(--muted);
-      font-size: 19px;
+      font-size: 17px;
       font-weight: 650;
     }
 
@@ -181,9 +181,9 @@
 
     .link-button {
       width: 100%;
-      min-height: 60px;
-      margin-top: 20px;
-      padding: 16px 18px;
+      min-height: 48px;
+      margin-top: 14px;
+      padding: 11px 16px;
       border: 0;
       border-radius: 16px;
       background: var(--blue);
@@ -198,7 +198,7 @@
 
     .group-card {
       margin-top: 20px;
-      padding: 20px 16px;
+      padding: 16px 14px;
       display: none;
     }
 
@@ -210,17 +210,17 @@
 
     .group-list {
       display: grid;
-      gap: 14px;
+      gap: 8px;
     }
 
     .group-item {
       width: 100%;
-      min-height: 78px;
+      min-height: 62px;
       text-align: left;
       border: 1px solid var(--line);
       border-radius: 15px;
       background: #fff;
-      padding: 15px 16px;
+      padding: 10px 14px;
       color: var(--text);
       transition: background .15s ease, border-color .15s ease, transform .08s ease;
     }
@@ -235,16 +235,16 @@
     }
 
     .group-code {
-      font-size: 19px;
+      font-size: 17px;
       font-weight: 750;
       line-height: 1.3;
       overflow-wrap: anywhere;
     }
 
     .group-sub {
-      margin-top: 5px;
+      margin-top: 2px;
       color: var(--muted);
-      font-size: 17px;
+      font-size: 15px;
       line-height: 1.3;
       overflow-wrap: anywhere;
     }
@@ -282,16 +282,16 @@
 
       .search-input,
       .btn {
-        height: 58px;
+        height: 36px;
       }
 
       .search-input {
-        font-size: 18px;
+        font-size: 15px;
         padding: 0 14px;
       }
 
       .btn {
-        font-size: 17px;
+        font-size: 15px;
       }
 
       .details {
@@ -299,11 +299,11 @@
       }
 
       .detail-row {
-        grid-template-columns: 106px minmax(0, 1fr);
+        grid-template-columns: 92px minmax(0, 1fr);
       }
 
       .group-card {
-        padding: 22px 14px;
+        padding: 16px 14px;
       }
     }
 
@@ -317,7 +317,7 @@
       }
 
       .btn {
-        font-size: 17px;
+        font-size: 15px;
       }
 
       .detail-row {

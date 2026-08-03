@@ -1,7 +1,9 @@
-const CACHE_NAME = "rpt-profile-mobile-v3-5-medium-group-codes";
+const CACHE_NAME = "rpt-profile-mobile-v36-compact-icon-refresh";
 const APP_FILES = ["./", "./index.html", "./manifest.json", "./icon.svg",
   "./icon-192.png",
-  "./icon-512.png"];
+  "./icon-512.png",
+  "./app-icon-192-v36.png",
+  "./app-icon-512-v36.png"];
 
 self.addEventListener("install", event => {
   event.waitUntil(
