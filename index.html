@@ -7,12 +7,12 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="RPT 프로필조회">
-  <link rel="manifest" href="./manifest.json">
-  <link rel="icon" href="./app-icon-192-v36.png" sizes="192x192" type="image/png">
-  <link rel="icon" href="./app-icon-512-v36.png" sizes="512x512" type="image/png">
-  <link rel="apple-touch-icon" href="./app-icon-192-v36.png">
-  <link rel="shortcut icon" href="./app-icon-192-v36.png" type="image/png">
-  <title>RPT 상품프로필조회 모바일 v3.6</title>
+  <link rel="manifest" href="./manifest.json?v=37">
+  <link rel="icon" href="./app-icon-dog-192-v37.png" sizes="192x192" type="image/png">
+  <link rel="icon" href="./app-icon-dog-512-v37.png" sizes="512x512" type="image/png">
+  <link rel="apple-touch-icon" href="./app-icon-dog-192-v37.png">
+  <link rel="shortcut icon" href="./app-icon-dog-192-v37.png" type="image/png">
+  <title>RPT 상품프로필조회 모바일 v3.7</title>
   <style>
     :root {
       --bg: #f5f5f7;
@@ -654,7 +654,7 @@
 
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+        navigator.serviceWorker.register("./service-worker.js?v=37").catch(() => {});
       });
     }
 
