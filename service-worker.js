@@ -1,9 +1,9 @@
-const CACHE_NAME = "rpt-profile-mobile-v38-group-condition";
+const CACHE_NAME = "rpt-profile-mobile-v39-search-group-priority";
 const APP_FILES = ["./", "./index.html", "./manifest.json", "./icon.svg",
   "./icon-192.png",
   "./icon-512.png",
-  "./app-icon-192-v38.png",
-  "./app-icon-512-v38.png"];
+  "./app-icon-192-v39.png",
+  "./app-icon-512-v39.png"];
 
 self.addEventListener("install", event => {
   event.waitUntil(

@@ -8,11 +8,11 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="RPT 프로필조회">
   <link rel="manifest" href="./manifest.json">
-  <link rel="icon" href="./app-icon-192-v38.png" sizes="192x192" type="image/png">
-  <link rel="icon" href="./app-icon-512-v38.png" sizes="512x512" type="image/png">
-  <link rel="apple-touch-icon" href="./app-icon-192-v38.png">
-  <link rel="shortcut icon" href="./app-icon-192-v38.png" type="image/png">
-  <title>RPT 상품프로필조회 모바일 v3.8</title>
+  <link rel="icon" href="./app-icon-192-v39.png" sizes="192x192" type="image/png">
+  <link rel="icon" href="./app-icon-512-v39.png" sizes="512x512" type="image/png">
+  <link rel="apple-touch-icon" href="./app-icon-192-v39.png">
+  <link rel="shortcut icon" href="./app-icon-192-v39.png" type="image/png">
+  <title>RPT 상품프로필조회 모바일 v3.9</title>
   <style>
     :root {
       --bg: #f5f5f7;
@@ -437,17 +437,6 @@
     }
 
     function chooseRepresentative(rows) {
-      for (const row of rows) {
-        const group = field(row, "group");
-        if (!group) continue;
-
-        const exact = products.find(item =>
-          normalize(field(item, "productCode")) === normalize(group) ||
-          normalize(field(item, "batchNo")) === normalize(group)
-        );
-        if (exact) return exact;
-      }
-
       return rows.find(row => field(row, "group")) || rows[0];
     }
 

@@ -1,24 +1,24 @@
 {
-  "name": "RPT 상품프로필조회 모바일 v3.8",
+  "name": "RPT 상품프로필조회 모바일 v3.9",
   "short_name": "RPT 프로필",
-  "start_url": "./index.html?v=38",
+  "start_url": "./index.html?v=39",
   "display": "standalone",
   "background_color": "#f5f5f7",
   "theme_color": "#0a84ff",
   "lang": "ko-KR",
   "icons": [
     {
-      "src": "./app-icon-192-v38.png",
+      "src": "./app-icon-192-v39.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "./app-icon-512-v38.png",
+      "src": "./app-icon-512-v39.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
   ],
-  "id": "/rpt-product-profile-v38/"
+  "id": "/rpt-product-profile-v39/"
 }
