@@ -1,24 +1,24 @@
 {
-  "name": "RPT 상품프로필조회 모바일 v3.7",
+  "name": "RPT 상품프로필조회 모바일 v3.8",
   "short_name": "RPT 프로필",
-  "start_url": "./index.html?v=37",
+  "start_url": "./index.html?v=38",
   "display": "standalone",
   "background_color": "#f5f5f7",
   "theme_color": "#0a84ff",
   "lang": "ko-KR",
   "icons": [
     {
-      "src": "./app-icon-dog-192-v37.png",
+      "src": "./app-icon-192-v38.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "./app-icon-dog-512-v37.png",
+      "src": "./app-icon-512-v38.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
   ],
-  "id": "/rpt-product-profile-v37-dog/"
+  "id": "/rpt-product-profile-v38/"
 }

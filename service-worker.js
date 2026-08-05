@@ -1,7 +1,9 @@
-const CACHE_NAME = "rpt-profile-mobile-v37-dog-icon-refresh";
-const APP_FILES = ["./", "./index.html?v=37", "./manifest.json",
-  "./app-icon-dog-192-v37.png",
-  "./app-icon-dog-512-v37.png"];
+const CACHE_NAME = "rpt-profile-mobile-v38-group-condition";
+const APP_FILES = ["./", "./index.html", "./manifest.json", "./icon.svg",
+  "./icon-192.png",
+  "./icon-512.png",
+  "./app-icon-192-v38.png",
+  "./app-icon-512-v38.png"];
 
 self.addEventListener("install", event => {
   event.waitUntil(

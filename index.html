@@ -7,12 +7,12 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="RPT 프로필조회">
-  <link rel="manifest" href="./manifest.json?v=37">
-  <link rel="icon" href="./app-icon-dog-192-v37.png" sizes="192x192" type="image/png">
-  <link rel="icon" href="./app-icon-dog-512-v37.png" sizes="512x512" type="image/png">
-  <link rel="apple-touch-icon" href="./app-icon-dog-192-v37.png">
-  <link rel="shortcut icon" href="./app-icon-dog-192-v37.png" type="image/png">
-  <title>RPT 상품프로필조회 모바일 v3.7</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./app-icon-192-v38.png" sizes="192x192" type="image/png">
+  <link rel="icon" href="./app-icon-512-v38.png" sizes="512x512" type="image/png">
+  <link rel="apple-touch-icon" href="./app-icon-192-v38.png">
+  <link rel="shortcut icon" href="./app-icon-192-v38.png" type="image/png">
+  <title>RPT 상품프로필조회 모바일 v3.8</title>
   <style>
     :root {
       --bg: #f5f5f7;
@@ -453,24 +453,14 @@
 
     function findGroupRows(row) {
       const groupValue = field(row, "group");
-      const code = field(row, "productCode");
-      const batch = field(row, "batchNo");
 
       if (!groupValue) {
         return [];
       }
 
-      return products.filter(item => {
-        const itemGroup = field(item, "group");
-        const itemCode = field(item, "productCode");
-        const itemBatch = field(item, "batchNo");
-
-        return normalize(itemGroup) === normalize(groupValue) ||
-               normalize(itemCode) === normalize(groupValue) ||
-               normalize(itemBatch) === normalize(groupValue) ||
-               normalize(itemGroup) === normalize(code) ||
-               normalize(itemGroup) === normalize(batch);
-      });
+      return products.filter(item =>
+        normalize(field(item, "group")) === normalize(groupValue)
+      );
     }
 
     function setText(id, text) {
@@ -654,7 +644,7 @@
 
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./service-worker.js?v=37").catch(() => {});
+        navigator.serviceWorker.register("./service-worker.js").catch(() => {});
       });
     }
 
